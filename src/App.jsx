@@ -1,13 +1,49 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 import "./App.css";
+import Menu from "./menu/menu";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [result, setResult] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const token = import.meta.env.VITE_TMDB_TOKEN;
+  const url = "https://api.themoviedb.org/3/trending/movie/day?language=en-US";
+
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const movies = async () => {
+    try {
+      const getMovies = await fetch(url, options);
+      const results = await getMovies.json();
+      setResult(results.results);
+    } catch (error) {
+      console.error("Error try again!!!", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    movies();
+  }, []);
 
   return (
     <>
-      <h1>teste</h1>
+      <Menu />
+      {loading ? (
+        "loading..."
+      ) : (
+        <div>
+          {result.map((e, index) => {
+            return <div key={index}>{e.title}</div>;
+          })}
+        </div>
+      )}
     </>
   );
 }

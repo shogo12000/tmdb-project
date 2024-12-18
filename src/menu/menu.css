@@ -1,0 +1,10 @@
+.menu{
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+}
+
+.menu ul{
+    display: flex;
+    gap: 1rem;
+}
