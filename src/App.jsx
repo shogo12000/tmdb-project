@@ -24,6 +24,7 @@ function App() {
     } catch (error) {
       console.error("Error try again!!!", error);
     } finally {
+      console.log(result)
       setLoading(false);
     }
   };
