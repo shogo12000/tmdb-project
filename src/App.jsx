@@ -21,6 +21,7 @@ function App() {
       const getMovies = await fetch(url, options);
       const results = await getMovies.json();
       setResult(results.results);
+      console.log(results)
     } catch (error) {
       console.error("Error try again!!!", error);
     } finally {
