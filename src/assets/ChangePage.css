@@ -1,0 +1,13 @@
+
+.pages{
+    display: flex;
+    background-color: brown;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem 0;
+}
+
+.pages .page{
+    font-weight: 700;
+}
