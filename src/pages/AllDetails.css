@@ -1,0 +1,20 @@
+.AllDetails {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 3rem;
+}
+
+.AllDetailsInner {
+  display: flex;
+  width: 100%;
+  max-width: 800px;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.AllDetailsLeft {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}

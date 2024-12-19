@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import allFetching from "../assets/allFetching";
 import ChangePage from "../assets/ChangePage";
+import SingleCard from "../assets/SingleCard";
 
 function Movies() {
   const [result, setResult] = useState([]);
@@ -40,10 +41,12 @@ function Movies() {
         <>
           <main>
             <div className="inner-main">
-            <h3>Movies &gt; 500 pages &gt; 1000 results</h3>
-            {result.map((e) => {
-              return <div>{e.title}</div>;
-            })}
+              <h3>Movies &gt; 500 pages &gt; 1000 results</h3>
+              <div className="showResult">
+                {result.map((e, index) => {
+                  return <SingleCard key={index} e={e} index={index} />;
+                })}
+              </div>
             </div>
           </main>
           <ChangePage

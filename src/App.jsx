@@ -5,10 +5,10 @@ import Menu from "./menu/menu";
 import Home from "./pages/Home";
 import People from "./pages/People";
 import Movies from "./pages/Movies";
+import AllDetails from "./pages/AllDetails";
 import Tv from "./pages/Tv";
 
 function App() {
-
   return (
     <>
       <BrowserRouter>
@@ -18,6 +18,7 @@ function App() {
             <Route path="movies" element={<Movies />} />
             <Route path="people" element={<People />} />
             <Route path="tv" element={<Tv />} />
+            <Route path="allDetails" element={<AllDetails />} />
             {/* <Route path="*" element={<NoPage />} /> */}
           </Route>
         </Routes>
