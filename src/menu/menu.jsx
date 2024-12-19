@@ -19,6 +19,9 @@ function Menu() {
           <li>
             <Link to="/tv">Tv</Link>
           </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
         </ul>
       </nav>
       <Outlet />
