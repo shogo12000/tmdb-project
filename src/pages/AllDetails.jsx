@@ -36,6 +36,9 @@ function AllDetails(e) {
               <li>
                 <p>Vote count: {result.vote_count} </p>
               </li>
+              <li>
+                <p>Type: {result.media_type} </p>
+              </li>
 
               <li>
                 <button onClick={() => navigate(-1)}>back</button>

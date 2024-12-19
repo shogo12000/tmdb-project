@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import People from "./pages/People";
 import Movies from "./pages/Movies";
 import AllDetails from "./pages/AllDetails";
+import Login from "./pages/Login";
 import Tv from "./pages/Tv";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="people" element={<People />} />
             <Route path="tv" element={<Tv />} />
             <Route path="allDetails" element={<AllDetails />} />
+            <Route path="login" element={<Login />} />
             {/* <Route path="*" element={<NoPage />} /> */}
           </Route>
         </Routes>
