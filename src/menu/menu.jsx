@@ -1,17 +1,29 @@
 import "./menu.css";
+import { Outlet, Link } from "react-router-dom";
 
-function Menu(){
-    return (
-        <nav className="menu">
-            <label>Logo</label>
-            <ul>
-                <li>Home</li>
-                <li>Movies</li>
-                <li>People</li>
-                <li>TV</li>
-            </ul>
-        </nav>
-    )
+function Menu() {
+  return (
+    <>
+      <nav className="menu">
+        <label>Logo</label>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/movies">Movies</Link>
+          </li>
+          <li>
+            <Link to="/people">People</Link>
+          </li>
+          <li>
+            <Link to="/tv">Tv</Link>
+          </li>
+        </ul>
+      </nav>
+      <Outlet />
+    </>
+  );
 }
 
 export default Menu;
