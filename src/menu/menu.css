@@ -8,3 +8,14 @@
     display: flex;
     gap: 1rem;
 }
+
+.menu a{
+    text-decoration: none;
+    color: white;
+    transition: 0.5s;
+}
+
+.menu a:hover{
+    color: greenyellow;
+    transition: 0.5s;
+}
