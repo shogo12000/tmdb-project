@@ -41,7 +41,7 @@ main .showResult{
 
 .responsive-image {
   width: 100%;  
-  max-width: 200px;  
+  max-width: 400px;  
   height: auto;  
   border-radius: 8px;  
   box-shadow: 0 4px 6px rgba(255, 255, 255, 0.918);
@@ -80,6 +80,15 @@ main .showResult{
   }
   main .showResult{
     grid-template-columns:  1fr;
+  }
+  main .showResult div{
+    display: flex;
+    flex-direction: column;  
+    align-items: center;
+  }
+  main .showResult div div{
+    font-size: 20px;
+    font-weight: 700;
   }
 }
 

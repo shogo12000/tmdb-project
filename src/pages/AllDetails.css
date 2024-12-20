@@ -18,3 +18,14 @@
   flex-direction: row;
   gap: 1.5rem;
 }
+
+@media screen and (max-width: 400px) {
+    .AllDetailsLeft {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .AllDetailsLeft ul{
+        padding: 0rem 1rem;
+    }
+}

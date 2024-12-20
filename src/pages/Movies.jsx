@@ -17,7 +17,7 @@ function Movies() {
         const url =
           "https://api.themoviedb.org/3/trending/movie/day?language=en-US&page=" +
           page;
-        const response = await allFetching(url);
+        const response = await allFetching.allFetching(url);
         setPage(response.page);
         setResult(response.results);
         setTotalPages(response.total_pages);

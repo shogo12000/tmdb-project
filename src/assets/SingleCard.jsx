@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SingleCard({ e, index }) {
-  const imageBaseURL = "https://image.tmdb.org/t/p/w200";
+  const imageBaseURL = "https://image.tmdb.org/t/p/w400";
   const [title, setTitle] = useState(e.title);
   const navigate = useNavigate();
 
