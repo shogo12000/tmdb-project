@@ -10,29 +10,33 @@ import Login from "./pages/Login";
 import Tv from "./pages/Tv";
 import { AuthContext } from "./AuthContext";
 import { useContext } from "react";
-import CheckToken from "./CheckCookie"
+import CheckToken from "./CheckCookie";
 
 function App() {
   const { tokenValidate } = useContext(AuthContext);
-  return ( 
+  return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Menu />}>
-            <Route
+            {/* <Route
               index
               element={
                 <CheckToken>
                   <Home />
                 </CheckToken>
               }
-            />
+            /> */}
+            <Route index element={<Home />} />
             <Route path="movies" element={<Movies />} />
             <Route path="people" element={<People />} />
             <Route path="tv" element={<Tv />} />
             <Route path="allDetails" element={<AllDetails />} />
-            <Route path="login" element={tokenValidate ? <Home />: <Login />} />
-            {/* <Route path="*" element={<NoPage />} /> */} 
+            <Route
+              path="login"
+              element={tokenValidate ? <Home /> : <Login />}
+            />
+            {/* <Route path="*" element={<NoPage />} /> */}
           </Route>
         </Routes>
       </BrowserRouter>

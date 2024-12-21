@@ -11,12 +11,13 @@ function Login() {
   const [userPassword, setUserPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [userLogged, setUserLogged] = useState(false);
-  const { setTokenValidate } = useContext(AuthContext);
+  const { setUser, setTokenValidate } = useContext(AuthContext);
 
   useEffect(() => {
     {
       if(userLogged){
         setTokenValidate(true);
+        setUser(userName);
         navigate("/");  
       }
  
@@ -27,8 +28,8 @@ function Login() {
     <>
       {!loading ? (
         <>
-          <p>username teste</p>
-          <p>password teste</p>
+          <p>username shogo</p>
+          <p>password shogo</p>
           <div className="login">
             userName:
             <input
