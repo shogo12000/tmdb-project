@@ -15,7 +15,7 @@ import CheckToken from "./checkCookie";
 
 function App() {
   const { tokenValidate } = useContext(AuthContext);
-  return (
+  return ( 
     <>
       <BrowserRouter>
         <Routes>
