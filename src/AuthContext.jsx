@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState("Jesse Hall");
+  const [user, setUser] = useState("");
   const [tokenValidate, setTokenValidate] = useState(
     !!Cookies.get("authToken")
   );
@@ -18,11 +18,12 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     Cookies.remove("authToken");
+    setUser("");
     setTokenValidate(false);
   };
 
   return (
-    <AuthContext.Provider value={{ user, tokenValidate, setTokenValidate, logout }}>
+    <AuthContext.Provider value={{ user, setUser, tokenValidate, setTokenValidate, logout }}>
       {children}
     </AuthContext.Provider>
   );
