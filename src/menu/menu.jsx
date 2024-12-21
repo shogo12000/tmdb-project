@@ -1,26 +1,89 @@
 import "./menu.css";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, NavLink } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../AuthContext";
 
 function Menu() {
+  const { tokenValidate, logout} = useContext(AuthContext);
+ 
   return (
     <>
       <nav className="menu">
         <label>Logo</label>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <NavLink
+              to="/"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "activeLink" : ""
+              }
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <Link to="/movies">Movies</Link>
+            <NavLink
+              to="/movies"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "activeLink" : ""
+              }
+            >
+              Movies
+            </NavLink>
           </li>
           <li>
-            <Link to="/people">People</Link>
+            <NavLink
+              to="/people"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "activeLink" : ""
+              }
+            >
+              People
+            </NavLink>
           </li>
           <li>
-            <Link to="/tv">Tv</Link>
+            <NavLink
+              to="/tv"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "activeLink" : ""
+              }
+            >
+              Tv
+            </NavLink>
           </li>
           <li>
-            <Link to="/login">Login</Link>
+            {!tokenValidate ? (
+              <NavLink
+                to="/login"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "activeLink" : ""
+                }
+              >
+                Login
+              </NavLink>
+            ) : (
+
+              <button
+              onClick={()=>logout()}
+              className="btn"
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                textDecoration: "none",
+              }}
+            >
+              Logout
+            </button>
+              // <NavLink
+              //   to="/"
+              //   className={({ isActive, isPending }) =>
+              //     isPending ? "pending" : isActive ? "activeLink" : ""
+              //   }
+              // >
+              //   Logout
+              // </NavLink>
+            )}
           </li>
         </ul>
       </nav>

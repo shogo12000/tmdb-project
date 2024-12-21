@@ -1,8 +1,9 @@
 import "./Login.css";
 import userLogin from "../assets/allFetching";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom"; 
+import { useContext } from "react";
+import { AuthContext } from "../AuthContext";
 
 function Login() {
   const navigate = useNavigate();
@@ -10,10 +11,15 @@ function Login() {
   const [userPassword, setUserPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [userLogged, setUserLogged] = useState(false);
+  const { setTokenValidate } = useContext(AuthContext);
 
   useEffect(() => {
     {
-      userLogged && navigate("/");
+      if(userLogged){
+        setTokenValidate(true);
+        navigate("/");  
+      }
+ 
     }
   }, [userLogged]);
 

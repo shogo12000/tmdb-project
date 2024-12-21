@@ -8,19 +8,31 @@ import Movies from "./pages/Movies";
 import AllDetails from "./pages/AllDetails";
 import Login from "./pages/Login";
 import Tv from "./pages/Tv";
+import { AuthProvider } from "./AuthContext";
+import { AuthContext } from "./AuthContext";
+import { useContext } from "react";
+import CheckToken from "./checkCookie";
 
 function App() {
+  const { tokenValidate } = useContext(AuthContext);
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Menu />}>
-            <Route index element={<Home />} />
+            <Route
+              index
+              element={
+                <CheckToken>
+                  <Home />
+                </CheckToken>
+              }
+            />
             <Route path="movies" element={<Movies />} />
             <Route path="people" element={<People />} />
             <Route path="tv" element={<Tv />} />
             <Route path="allDetails" element={<AllDetails />} />
-            <Route path="login" element={<Login />} />
+            <Route path="login" element={tokenValidate ? <Home />: <Login />} />
             {/* <Route path="*" element={<NoPage />} /> */}
           </Route>
         </Routes>
