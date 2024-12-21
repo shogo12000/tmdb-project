@@ -33,7 +33,7 @@ function App() {
             <Route path="tv" element={<Tv />} />
             <Route path="allDetails" element={<AllDetails />} />
             <Route path="login" element={tokenValidate ? <Home />: <Login />} />
-            {/* <Route path="*" element={<NoPage />} /> */}
+            {/* <Route path="*" element={<NoPage />} /> */} 
           </Route>
         </Routes>
       </BrowserRouter>
