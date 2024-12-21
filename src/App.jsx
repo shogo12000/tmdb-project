@@ -8,10 +8,9 @@ import Movies from "./pages/Movies";
 import AllDetails from "./pages/AllDetails";
 import Login from "./pages/Login";
 import Tv from "./pages/Tv";
-import { AuthProvider } from "./AuthContext";
 import { AuthContext } from "./AuthContext";
 import { useContext } from "react";
-import CheckToken from "./checkCookie";
+import CheckToken from "./CheckCookie"
 
 function App() {
   const { tokenValidate } = useContext(AuthContext);
