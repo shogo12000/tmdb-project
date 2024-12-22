@@ -5,6 +5,9 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState("");
+  const [watchLater, setWatchLater] = useState([]);
+  const [watched, setWatched] = useState([]);
+  const [watching, setWatching] = useState([]);
   const [tokenValidate, setTokenValidate] = useState(
     !!Cookies.get("authToken")
   );
@@ -12,8 +15,12 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     console.log("checando o token");
     const token = Cookies.get("authToken");
+
     setTokenValidate(!!token);
-    console.log(tokenValidate);
+    if(tokenValidate){ 
+      const parseData = JSON.parse(token); 
+      setUser(parseData.username);
+    }
   }, []);
 
   const logout = () => {
@@ -23,7 +30,21 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, tokenValidate, setTokenValidate, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        setUser,
+        tokenValidate,
+        setTokenValidate,
+        logout,
+        watchLater,
+        setWatchLater,
+        watched,
+        setWatched,
+        watching,
+        setWatching,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
