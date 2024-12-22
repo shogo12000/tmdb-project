@@ -1,7 +1,7 @@
 import "./Login.css";
 import userLogin from "../assets/allFetching";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../AuthContext";
 
@@ -11,16 +11,16 @@ function Login() {
   const [userPassword, setUserPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [userLogged, setUserLogged] = useState(false);
-  const { setUser, setTokenValidate } = useContext(AuthContext);
+  const { setUser, setTokenValidate, setWatchLater, setWatched, setWatching } =
+    useContext(AuthContext);
 
   useEffect(() => {
     {
-      if(userLogged){
+      if (userLogged) {
         setTokenValidate(true);
         setUser(userName);
-        navigate("/");  
+        navigate("/");
       }
- 
     }
   }, [userLogged]);
 
@@ -45,7 +45,15 @@ function Login() {
             />
             <button
               onClick={() =>
-                userLogin.userLogin(userName, userPassword, setLoading, setUserLogged)
+                userLogin.userLogin(
+                  userName,
+                  userPassword,
+                  setLoading,
+                  setUserLogged,
+                  setWatchLater,
+                  setWatched,
+                  setWatching
+                )
               }
             >
               login

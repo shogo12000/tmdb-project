@@ -75,14 +75,7 @@ function Menu() {
             >
               Logout
             </button>
-              // <NavLink
-              //   to="/"
-              //   className={({ isActive, isPending }) =>
-              //     isPending ? "pending" : isActive ? "activeLink" : ""
-              //   }
-              // >
-              //   Logout
-              // </NavLink>
+ 
             )}
           </li>
         </ul>
