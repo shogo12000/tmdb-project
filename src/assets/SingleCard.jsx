@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../AuthContext";
 
-function SingleCard({ e, index }) {
+function SingleCard({ e, index, data }) {
   const imageBaseURL = "https://image.tmdb.org/t/p/w400";
   const [title, setTitle] = useState(e.title);
   const navigate = useNavigate();
@@ -21,51 +21,67 @@ function SingleCard({ e, index }) {
   };
 
   useEffect(() => {
-    const newTitle = checkTitle(e.title);
-    setTitle(newTitle);
- 
- 
-    const check = watched.find(num =>  num.id === e.id.toString());
-    if(check){
-      setWatchedState(true);
+    if (data != null) {
+      setWatchLaterState(false);
+      setWatchingState(false);
+      setWatchedState(false);
+
+      const newTitle = checkTitle(e.title);
+      setTitle(newTitle);
+
+      const check = data.watched.find((num) => num.id === e.id.toString());
+      if (check) {
+        setWatchedState(true);
+      }
+
+      const checkWatching = data.watching.find(
+        (num) => num.id === e.id.toString()
+      );
+
+      if (checkWatching) {
+        setWatchingState(true);
+      }
+
+      const checkWatchLater = data.watchLater.find(
+        (num) => num.id === e.id.toString()
+      );
+      if (checkWatchLater) {
+        setWatchLaterState(true);
+      }
+    }else{
+      setWatchedState(false);
+      setWatchLaterState(false);
+      setWatchingState(false);
     }
+  }, [data]);
 
-    const checkWatching = watching.find(num =>  num.id === e.id.toString());
-    if(checkWatching){
-      setWatchingState(true);
-    }
+  const treatCheckBox = (e, obj, watch) => {
+    const checked = e.target.checked;
 
-    const checkWatchLater = watchLater.find(num =>  num.id === e.id.toString());
-    if(checkWatchLater){
-      setWatchLaterState(true);
-    }
-
-
-  }, []);
-
-
-  const treatCheckBox = (e,obj, watch)=>{
-     const checked = e.target.checked;  
- 
     switch (watch) {
       case "watched": {
         setWatchedState(checked);
-        console.log(obj)
-        if(checked){
-
+        console.log(obj);
+        if (checked) {
+          console.log("Esta Checado");
         }
-        break; // Importante para evitar que outros casos sejam executados
+        break;
       }
       case "watchLater": {
-        setWatchLaterState(checked); 
-        // Lógica para quando a variável 'watch' for igual a "watchLater"
+        setWatchLaterState(checked);
+        console.log(obj);
         console.log("Adicionado à lista para assistir depois");
+        if (checked) {
+          console.log("Esta Checado");
+        }
         break;
       }
       case "watching": {
         setWatchingState(checked);
-        // Lógica para quando a variável 'watch' for igual a "watchLater"
         console.log("Adicionado à lista assistindo");
+        if (checked) {
+          console.log("Esta Checado");
+        }
         break;
       }
       default: {
@@ -73,7 +89,7 @@ function SingleCard({ e, index }) {
         console.log("Estado desconhecido");
       }
     }
-  }
+  };
 
   return (
     <div>
@@ -90,13 +106,28 @@ function SingleCard({ e, index }) {
       </div>
       <ul>
         <li>
-          <input type="checkbox"   onChange={(r)=>treatCheckBox(r, e, "watched")} checked={watchedState}/> Watched
+          <input
+            type="checkbox"
+            onChange={(r) => treatCheckBox(r, e, "watched")}
+            checked={watchedState}
+          />{" "}
+          Watched
         </li>
         <li>
-          <input type="checkbox"   onChange={(r)=>treatCheckBox(r, e.id, "watchLater")} checked={watchLaterState}/> Watch Later
+          <input
+            type="checkbox"
+            onChange={(r) => treatCheckBox(r, e, "watchLater")}
+            checked={watchLaterState}
+          />{" "}
+          Watch Later
         </li>
         <li>
-          <input type="checkbox"   onChange={(r)=>treatCheckBox(r, e.id, "watching")} checked={watchingState}/> Watching
+          <input
+            type="checkbox"
+            onChange={(r) => treatCheckBox(r, e, "watching")}
+            checked={watchingState}
+          />{" "}
+          Watching
         </li>
       </ul>
     </div>

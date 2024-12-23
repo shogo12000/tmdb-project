@@ -1,7 +1,8 @@
 import "./ChangePage.css";
 
-const ChangePage = ({ page, setPage, totalPages, totalResults }) => {
+const ChangePage = ({ page, setPage, totalPages, setLoading}) => {
   const handlePageChange = (direction) => {
+    setLoading(true);
     if (direction === 1 && page < totalPages) {
       setPage(page + 1);
     } else if (direction === -1 && page > 1) {

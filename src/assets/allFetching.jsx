@@ -1,7 +1,4 @@
 import Cookies from "js-cookie";
-import { useContext } from "react";
-import { AuthContext } from "../AuthContext";
-
 const token = import.meta.env.VITE_TMDB_TOKEN;
 
 const options = {
@@ -22,6 +19,20 @@ const allFetching = async (url) => {
   }
 };
 
+const movieFetching = async (url, user, token)=>{ 
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer "+token,
+      "Content-Type": "application/json",
+    },
+  })
+ 
+  const data = await response.json();
+ 
+  return data;
+}
+
 const userLogin = async (
   email,
   password,
@@ -29,7 +40,8 @@ const userLogin = async (
   setLogged,
   setWatchLater,
   setWached,
-  setWatching
+  setWatching, 
+  setUserToken
 ) => {
   try {
     callBack(true);
@@ -53,11 +65,11 @@ const userLogin = async (
     }
 
     const data = await response.json();
- 
-
     const token = data;
-    console.log(token);
+ 
     if (token) {
+      setUserToken(token.token);
+
       Cookies.set("authToken", JSON.stringify({
         token: token.token,
         username: token.user.email,
@@ -66,8 +78,7 @@ const userLogin = async (
         secure: true,
         sameSite: "Strict",
       });
-      console.log("existe.......")
-      console.log(token);
+
       setWatchLater(data.user.watchLater);
       setWached(data.user.watched);
       setWatching(data.user.watching);
@@ -76,8 +87,7 @@ const userLogin = async (
     }
   } catch (error) {
     console.error("Error:", error);
-  } finally {
   }
 };
 
-export default { allFetching, userLogin };
+export default { allFetching, userLogin, movieFetching };
