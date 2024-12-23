@@ -11,7 +11,7 @@ function Login() {
   const [userPassword, setUserPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [userLogged, setUserLogged] = useState(false);
-  const { setUser, setTokenValidate, setWatchLater, setWatched, setWatching } =
+  const { setUser, setTokenValidate, setWatchLater, setWatched, setWatching, setUserToken } =
     useContext(AuthContext);
 
   useEffect(() => {
@@ -52,7 +52,8 @@ function Login() {
                   setUserLogged,
                   setWatchLater,
                   setWatched,
-                  setWatching
+                  setWatching,
+                  setUserToken
                 )
               }
             >

@@ -11,21 +11,32 @@ export const AuthProvider = ({ children }) => {
   const [tokenValidate, setTokenValidate] = useState(
     !!Cookies.get("authToken")
   );
+  const [userToken, setUserToken] = useState("");
 
   useEffect(() => {
-    console.log("checando o token");
-    const token = Cookies.get("authToken");
+    const checkUser = async () => { 
+      const token = Cookies.get("authToken");
 
-    setTokenValidate(!!token);
-    if(tokenValidate){ 
-      const parseData = JSON.parse(token); 
-      setUser(parseData.username);
-    }
+      if (token) {
+        const parseData = JSON.parse(token); // Removeu o await, já que JSON.parse é síncrono
+        setUser(parseData.username);
+        setUserToken(parseData.token);
+        setTokenValidate(true);
+      } else {
+        setUser("");
+        setTokenValidate(false);
+      }
+    };
+    checkUser();
   }, []);
 
   const logout = () => {
     Cookies.remove("authToken");
     setUser("");
+    setWatchLater([]);
+    setWatched([]);
+    setWatching([]);
+    setUserToken("");
     setTokenValidate(false);
   };
 
@@ -34,6 +45,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         setUser,
+        setUserToken,
         tokenValidate,
         setTokenValidate,
         logout,
@@ -43,6 +55,7 @@ export const AuthProvider = ({ children }) => {
         setWatched,
         watching,
         setWatching,
+        userToken,
       }}
     >
       {children}
