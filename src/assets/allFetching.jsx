@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 const token = import.meta.env.VITE_TMDB_TOKEN;
 
+
 const options = {
   method: "GET",
   headers: {
@@ -90,4 +91,27 @@ const userLogin = async (
   }
 };
 
-export default { allFetching, userLogin, movieFetching };
+const saveMovies = async (newObj, userToken)=>{
+  console.log("saving movies");
+  console.log(newObj);
+  console.log(userToken);
+  try{
+    const response = await fetch("https://tmdb-backend-eta.vercel.app/api/auth/savemovies", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer "+userToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newObj),
+    })
+
+    if (!response.ok) {
+      throw new Error("Error adding movie");
+    }
+
+  }catch(error){
+    console.error("error: ", error)
+  }
+
+}
+export default { allFetching, userLogin, movieFetching, saveMovies };
