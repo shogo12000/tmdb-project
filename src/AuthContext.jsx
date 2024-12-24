@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
       const token = Cookies.get("authToken");
 
       if (token) {
-        const parseData = JSON.parse(token); // Removeu o await, já que JSON.parse é síncrono
+        const parseData = JSON.parse(token);  
         setUser(parseData.username);
         setUserToken(parseData.token);
         setTokenValidate(true);

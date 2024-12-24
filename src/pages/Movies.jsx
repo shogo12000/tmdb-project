@@ -26,7 +26,7 @@ function Movies() {
             userToken
           );
           setData(dataResponse);
-        }else{
+        } else {
           setData(null);
         }
 
@@ -42,7 +42,6 @@ function Movies() {
       } catch (error) {
         console.error("error fetching movie: ", error);
       } finally {
- 
         setLoading(false);
       }
     };
@@ -64,7 +63,14 @@ function Movies() {
               <div className="showResult">
                 {result.map((e, index) => {
                   return (
-                    <SingleCard key={index} e={e} index={index} data={data} />
+                    <SingleCard
+                      key={index}
+                      e={e}
+                      index={index}
+                      data={data}
+                      user={user}
+                      userToken={userToken}
+                    />
                   );
                 })}
               </div>

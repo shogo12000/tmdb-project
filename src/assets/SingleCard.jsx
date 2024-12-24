@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../AuthContext";
+import allFetching from "./allFetching";
 
-function SingleCard({ e, index, data }) {
+function SingleCard({ e, index, data, user, userToken }) {
   const imageBaseURL = "https://image.tmdb.org/t/p/w400";
   const [title, setTitle] = useState(e.title);
   const navigate = useNavigate();
   const [watchedState, setWatchedState] = useState(false);
   const [watchLaterState, setWatchLaterState] = useState(false);
   const [watchingState, setWatchingState] = useState(false);
-  const { watched, watching, watchLater } = useContext(AuthContext);
 
   const checkTitle = (e) => {
     var newTitle = e;
@@ -48,7 +46,7 @@ function SingleCard({ e, index, data }) {
       if (checkWatchLater) {
         setWatchLaterState(true);
       }
-    }else{
+    } else {
       setWatchedState(false);
       setWatchLaterState(false);
       setWatchingState(false);
@@ -56,38 +54,43 @@ function SingleCard({ e, index, data }) {
   }, [data]);
 
   const treatCheckBox = (e, obj, watch) => {
-    const checked = e.target.checked;
+    if (userToken != "") {
+      const checked = e.target.checked;
+      const objId = obj.id;
+      const objTitle = obj.title;
+      const objPoster_path = obj.poster_path;
+      const newObj = {
+        email: user,
+        checkBox: watch,
+        task: checked ? "add" : "erase",
+        id: objId,
+        title: objTitle,
+        poster_path: objPoster_path,
+      };
 
-    switch (watch) {
-      case "watched": {
-        setWatchedState(checked);
-        console.log(obj);
-        if (checked) {
-          console.log("Esta Checado");
+      switch (watch) {
+        case "watched": {
+          setWatchedState(checked);
+          allFetching.saveMovies(newObj, userToken);
+          break;
         }
-        break;
-      }
-      case "watchLater": {
-        setWatchLaterState(checked);
-        console.log(obj);
-        console.log("Adicionado à lista para assistir depois");
-        if (checked) {
-          console.log("Esta Checado");
+        case "watchLater": {
+          setWatchLaterState(checked);
+          allFetching.saveMovies(newObj, userToken);
+          break;
         }
-        break;
-      }
-      case "watching": {
-        setWatchingState(checked);
-        console.log("Adicionado à lista assistindo");
-        if (checked) {
-          console.log("Esta Checado");
+        case "watching": {
+          setWatchingState(checked);
+          allFetching.saveMovies(newObj, userToken);
+          break;
         }
-        break;
+        default: {
+          // Caso nenhum dos casos seja correspondente
+          console.log("Estado desconhecido");
+        }
       }
-      default: {
-        // Caso nenhum dos casos seja correspondente
-        console.log("Estado desconhecido");
-      }
+    } else {
+      console.log("token vazio");
     }
   };
 
