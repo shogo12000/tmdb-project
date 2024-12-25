@@ -31,7 +31,7 @@ function Menu() {
               Movies
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink
               to="/people"
               className={({ isActive, isPending }) =>
@@ -50,7 +50,7 @@ function Menu() {
             >
               Tv
             </NavLink>
-          </li>
+          </li> */}
           <li>
             {!tokenValidate ? (
               <NavLink
