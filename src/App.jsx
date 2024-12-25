@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Menu from "./menu/menu";
 import Home from "./pages/Home";
-import People from "./pages/People";
+// import People from "./pages/People";
 import Movies from "./pages/Movies";
 import AllDetails from "./pages/AllDetails";
 import Login from "./pages/Login";
@@ -29,7 +29,7 @@ function App() {
             /> */}
             <Route index element={<Home />} />
             <Route path="movies" element={<Movies />} />
-            <Route path="people" element={<People />} />
+            {/* <Route path="people" element={<People />} /> */}
             <Route path="tv" element={<Tv />} />
             <Route path="allDetails" element={<AllDetails />} />
             <Route

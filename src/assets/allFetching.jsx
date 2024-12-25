@@ -37,15 +37,16 @@ const movieFetching = async (url, user, token)=>{
 const userLogin = async (
   email,
   password,
-  callBack,
+  setLoading, 
   setLogged,
   setWatchLater,
   setWached,
+  
   setWatching, 
   setUserToken
 ) => {
   try {
-    callBack(true);
+    setLoading(true);
     const response = await fetch(
       "https://tmdb-backend-eta.vercel.app/api/auth/login",
       {
@@ -60,9 +61,11 @@ const userLogin = async (
         }),
       }
     );
-
+    console.log(response);
     if (!response.ok) {
-      throw new Error("Error trying to login");
+      console.log("Error trying to login");
+      setLoading(false);
+      return 
     }
 
     const data = await response.json();
@@ -84,7 +87,7 @@ const userLogin = async (
       setWached(data.user.watched);
       setWatching(data.user.watching);
       setLogged(true);
-      callBack(false);
+      setLoading(false);
     }
   } catch (error) {
     console.error("Error:", error);
